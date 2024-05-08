@@ -8,4 +8,4 @@ spec:
   maxUnavailable: 1
   selector:
     matchLabels:
-      {{- include "java.selectorLabels" . | nindent 6 }}
+      {{- include "java.labels" . | nindent 6 }}
