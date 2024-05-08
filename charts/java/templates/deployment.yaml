@@ -54,7 +54,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ $secretName }}
-                  key: {{ $secretKey | quote }}
+                  key: {{ $val | quote }}
           {{- end }}
           {{- end }}
           {{- end }}
