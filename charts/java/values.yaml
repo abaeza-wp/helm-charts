@@ -4,6 +4,7 @@ global:
   environment: ""
   clusterName: ""
 
+# These values will be customized by consumers
 name: "example-service"
 namespace: "a4e-example-service"
 
@@ -11,7 +12,7 @@ imageTag: "1236"
 
 applicationPort: "8080"
 
-ingressHost: default-route-openshift-image-registry.apps.{{ .Values.global.region }}{{ .Values.global.cluster-name }}.{{ .Values.global.environment }}.msp.worldpay.io
+ingressHost: default-route-openshift-image-registry.apps.{{ .Values.global.region }}{{ .Values.global.clusterName }}.{{ .Values.global.environment }}.msp.worldpay.io
 
 #serviceAccountName: a4e-example-service-sa
 
