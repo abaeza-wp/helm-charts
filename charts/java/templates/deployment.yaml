@@ -9,7 +9,7 @@ spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      {{- include "java.labels" . | nindent 6 }}
+      {{- include "java.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       name: {{ include "java.fullname" . }}
