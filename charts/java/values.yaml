@@ -10,7 +10,7 @@ namespace: "a4e-example-service"
 
 imageTag: "1236"
 
-applicationPort: "8080"
+applicationPort: 8080
 
 ingressHost: default-route-openshift-image-registry.apps.{{ .Values.global.region }}-{{ .Values.global.clusterName }}.{{ .Values.global.environment }}.msp.worldpay.io
 

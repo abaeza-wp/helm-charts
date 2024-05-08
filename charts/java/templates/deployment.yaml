@@ -31,7 +31,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: SERVER_PORT
-              value: {{ .Values.applicationPort }}
+              value: {{ .Values.applicationPort | quote }}
           {{- if or .Values.environment }}
           {{- $environmentMap := dict -}}
           {{- range $key, $value := .Values.environment -}}
