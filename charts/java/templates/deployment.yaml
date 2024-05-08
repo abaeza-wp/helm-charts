@@ -107,3 +107,15 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- end }}
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "java.fullname" . }}
+  labels:
+    {{- include "java.labels" . | nindent 4 }}
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      {{- include "java.selectorLabels" . | nindent 6 }}
