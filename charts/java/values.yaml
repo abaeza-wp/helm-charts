@@ -1,3 +1,9 @@
+#These global values would automatically be injected by CI
+global:
+  region: ""
+  environment: ""
+  clusterName: ""
+
 name: "example-service"
 namespace: "a4e-example-service"
 
