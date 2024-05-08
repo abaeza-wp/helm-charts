@@ -3,6 +3,16 @@ entries:
   java:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-05-08T13:10:39.264831474Z"
+    description: A Helm chart for Java applications in GKOP
+    digest: e10774e3a6937582229fd2c15a6328f82ba8333c83dc98f964154bedc3f9dfcc
+    name: java
+    type: application
+    urls:
+    - https://github.com/abaeza-wp/helm-charts/releases/download/java-0.1.4/java-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-05-08T12:48:26.87957398Z"
     description: A Helm chart for Java applications in GKOP
     digest: 1c4425bd4a9307a1ee3d7eae74297d736d465fdf2d2b7dc277919fe7aac30dbb
@@ -31,4 +41,4 @@ entries:
     urls:
     - https://github.com/abaeza-wp/helm-charts/releases/download/java-0.1.1/java-0.1.1.tgz
     version: 0.1.1
-generated: "2024-05-08T12:48:26.879625266Z"
+generated: "2024-05-08T13:10:39.264851271Z"
