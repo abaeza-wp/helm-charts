@@ -1,0 +1,110 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{.Values.namespace}}
+  name: {{ include "java.fullname" . }}
+  labels:
+    {{- include "java.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      {{- include "java.labels" . | nindent 6 }}
+  template:
+    metadata:
+      name: {{ include "java.fullname" . }}
+      labels:
+        {{- include "java.labels" . | nindent 8 }}
+        format.logging.fis.dev/main: json
+    spec:
+      {{- if or .Values.serviceAccountName }}
+      serviceAccountName: {{ .Values.serviceAccountName}}
+      {{- end }}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: { }
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: main
+          image:
+            image-registry.openshift-image-registry.svc:5000/{{ .Values.namespace }}/{{ .Values.name }}:{{ .Values.imageTag }}
+          imagePullPolicy: Always
+          env:
+            - name: SERVER_PORT
+              value: {{ .Values.applicationPort }}
+          {{- if or .Values.environment }}
+          {{- $environmentMap := dict -}}
+          {{- range $key, $value := .Values.environment -}}
+          {{- $_ := set $environmentMap $key $value -}}
+          {{- end -}}
+          {{- range $key, $val := $environmentMap }}
+            - name: {{ $key }}
+              value: {{ $val | quote }}
+          {{- end }}
+          {{- end }}
+
+          {{- if or .Values.secrets }}
+
+          {{- range $secretName, $props := .Values.secrets -}}
+          {{- range $entry := $props -}}
+          {{- $secretsEnvironmentMap := dict -}}
+          {{- range $envKey, $value := $entry -}}
+          {{- $_ := set $secretsEnvironmentMap $envKey $value -}}
+          {{- range $secretKey, $val := $secretsEnvironmentMap }}
+            - name: {{ $envKey }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $secretName }}
+                  key: {{ $secretKey | quote }}
+          {{- end }}
+          {{- end }}
+          {{- end }}
+          {{- end }}
+          {{- end }}
+          ports:
+            - containerPort: {{ .Values.applicationPort }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /admin/health
+              port: {{ .Values.applicationPort }}
+              scheme: HTTP
+            initialDelaySeconds: 30
+            failureThreshold: 2
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /admin/health
+              port: {{ .Values.applicationPort }}
+              scheme: HTTP
+            initialDelaySeconds: 10
+            failureThreshold: 2
+            periodSeconds: 5
+          startupProbe:
+            httpGet:
+              path: /admin/health
+              port: {{ .Values.applicationPort }}
+              scheme: HTTP
+            initialDelaySeconds: 30
+            failureThreshold: 30
+            periodSeconds: 5
+          resources:
+            requests:
+              memory: "{{ .Values.resources.memoryRequests }}"
+              cpu: "{{ .Values.resources.cpuRequests }}"
+            limits:
+              memory: "{{ .Values.resources.memoryLimits }}"
+              cpu: "{{ .Values.resources.cpuLimits }}"
+          terminationMessagePath: /dev/termination-log
+         {{- if or .Values.volumeMounts }}
+         {{- with .Values.volumeMounts }}
+          volumeMounts:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- end }}
+      {{- if or .Values.volumes }}
+      {{- with .Values.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- end }}
