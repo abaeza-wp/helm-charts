@@ -65,25 +65,22 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /admin/health
+              path: {{ .Values.healthEndpoint }}
               port: {{ .Values.applicationPort }}
-              scheme: HTTP
             initialDelaySeconds: 30
             failureThreshold: 2
             periodSeconds: 5
           readinessProbe:
             httpGet:
-              path: /admin/health
+              path: {{ .Values.healthEndpoint }}
               port: {{ .Values.applicationPort }}
-              scheme: HTTP
             initialDelaySeconds: 10
             failureThreshold: 2
             periodSeconds: 5
           startupProbe:
             httpGet:
-              path: /admin/health
+              path: {{ .Values.healthEndpoint }}
               port: {{ .Values.applicationPort }}
-              scheme: HTTP
             initialDelaySeconds: 30
             failureThreshold: 30
             periodSeconds: 5
