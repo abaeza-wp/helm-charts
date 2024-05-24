@@ -3,7 +3,7 @@ global:
   awsRegion: ""
   environment: ""
   clusterName: ""
-  functionalEnvironment: "live"
+  functionalEnvironment: ""
 
 # Allows Overriding the name of resources
 fullnameOverride: ""
