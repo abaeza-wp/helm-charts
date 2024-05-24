@@ -8,20 +8,35 @@ Expand the name of the chart.
 {{/*
 Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
-If release name contains chart name it will be used as a full name.
+Optionally includes functional environment if one was defined using pattern -<app-name>-<functional-environment>
+e.g example-service-live, e.g example-service-try
 */}}
 {{- define "java.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
 {{- $name := default .Values.name }}
-{{- if contains $name .Release.Name }}
-{{- .Release.Name | trunc 63 | trimSuffix "-" }}
+{{- if .Values.global.functionalEnvironment }}
+{{- printf "%s-%s" $name .Values.global.functionalEnvironment | trunc 63 | trimSuffix "-" }}
 {{- else }}
 {{- printf "%s" $name | trunc 63 | trimSuffix "-" }}
 {{- end }}
 {{- end }}
 {{- end }}
+
+{{/*
+Create namespace using tenant and name using patternt <tenant>-<app-name> e.g a4e-example-service
+optionally includes functional environment if one was defined using pattern <tenant>-<app-name>-<functional-environment>
+e.g a4e-example-service-live, e.g a4e-example-service-try
+*/}}
+{{- define "java.namespace" -}}
+{{- if .Values.global.functionalEnvironment }}
+{{- printf "%s-%s-%s" .Values.tenant .Values.name .Values.global.functionalEnvironment | trunc 63 | trimSuffix "-" }}
+{{- else }}
+{{- printf "%s-%s" .Values.tenant .Values.name | trunc 63 | trimSuffix "-" }}
+{{- end }}
+{{- end }}
+
 
 {{/*
 Create chart name and version as used by the chart label.

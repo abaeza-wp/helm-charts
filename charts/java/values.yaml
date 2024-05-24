@@ -1,20 +1,24 @@
 #These global values would automatically be injected by CI
 global:
-  region: ""
+  awsRegion: ""
   environment: ""
   clusterName: ""
+  functionalEnvironment: "live"
+
+# Allows Overriding the name of resources
+fullnameOverride: ""
 
 # These values will be customized by consumers
+tenant: "a4e"
 name: "example-service"
-namespace: "a4e-example-service"
 
 imageTag: "1236"
 
 applicationPort: 8080
 
-ingressHost: default-route-openshift-image-registry.apps.{{ .Values.global.region }}-{{ .Values.global.clusterName }}.{{ .Values.global.environment }}.msp.worldpay.io
+ingressHost: example-service-{{ .Values.global.functionalEnvironment }}.apps.{{ .Values.global.awsRegion }}-{{ .Values.global.clusterName }}.{{ .Values.global.environment }}.msp.worldpay.io
 
-#serviceAccountName: a4e-example-service-sa
+serviceAccountName: ""
 
 replicas: 3
 
@@ -24,7 +28,7 @@ resources:
   cpuRequests: 300m
   cpuLimits: 1000m
 
-volumeMounts: []
+volumeMounts: [ ]
 #  - name: example-service-config-volume
 #    mountPath: /app/application-config
 #    readOnly: true
@@ -32,7 +36,7 @@ volumeMounts: []
 #    mountPath: /app/application-secret
 #    readOnly: true
 
-volumes: []
+volumes: [ ]
 #  - name: example-service-config-volume
 #    mountPath: /app/application-config
 #    configMap:

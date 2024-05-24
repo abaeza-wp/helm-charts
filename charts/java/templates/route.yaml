@@ -1,7 +1,7 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  namespace: {{.Values.namespace}}
+  namespace: {{ include "java.namespace" . }}
   name: {{ include "java.fullname" . }}
   labels:
     {{- include "java.labels" . | nindent 4 }}
