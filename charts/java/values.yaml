@@ -48,11 +48,11 @@ volumes: []
 #       path: some-item.json
 #       mode: 420
 
-#environment:
+environment:
 #  SPRING_CONFIG_IMPORT: "file:/app/application-secret/vault-config.yaml"
 #  SPRING_CONFIG_LOCATION: "classpath:/application.yml,/app/application-config/application.yml"
 
-#secrets:
+secrets:
 #  a4e-sessions-service:
 #    - VAULT_ROLE_ID: vault-role-id
 #    - VAULT_SECRET_ID: vault-secret-id
