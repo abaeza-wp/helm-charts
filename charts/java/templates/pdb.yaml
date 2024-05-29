@@ -6,6 +6,7 @@ metadata:
     {{- include "java.labels" . | nindent 4 }}
 spec:
   maxUnavailable: 1
+  unhealthyPodEvictionPolicy: IfHealthyBudget
   selector:
     matchLabels:
       {{- include "java.selectorLabels" . | nindent 6 }}
