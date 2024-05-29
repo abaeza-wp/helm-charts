@@ -49,20 +49,26 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "java.labels" -}}
-helm.sh/chart: {{ include "java.chart" . }}
 {{ include "java.selectorLabels" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{ include "java.metaLabels" . }}
 {{- end }}
 
 {{/*
 Selector labels
 */}}
 {{- define "java.selectorLabels" -}}
-app: {{ include "java.fullname" . }}
+app.kubernetes.io/name: {{ include "java.fullname" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+{{/*
+Create unified labels
+*/}}
+{{- define "java.metaLabels" -}}
+app.kubernetes.io/version: {{ .Chart.AppVersion }}
+helm.sh/chart: {{ include "java.chart" . }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end -}}
 
 {{/*
 Create the name of the service account to use
