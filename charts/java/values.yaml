@@ -39,6 +39,14 @@ volumes: []
 #   mountPath: /app/application-secret
 #   secret: example-service-vault-config
 #   readOnly: true
+# - name: another-example-service-vault-config-volume
+#   mountPath: /app/application-secret-item
+#   secret: example-service-vault-config
+#   readOnly: true
+#   items:
+#     - key: some-item.json
+#       path: some-item.json
+#       mode: 420
 
 #environment:
 #  SPRING_CONFIG_IMPORT: "file:/app/application-secret/vault-config.yaml"

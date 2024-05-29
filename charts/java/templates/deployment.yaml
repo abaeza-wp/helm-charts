@@ -111,10 +111,22 @@ spec:
           {{- if .configMap }}
           configMap:
             name: {{.configMap}}
+            items:
+            {{- if .items }}
+            {{- with .items }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+            {{- end }}
           {{- end }}
           {{- if .secret }}
           secret:
             secretName: {{ .secret }}
+            {{- if .items }}
+            items:
+            {{- with .items }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+            {{- end }}
           {{- end }}
       {{- end }}
       {{- end }}
