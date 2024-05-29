@@ -96,15 +96,25 @@ spec:
               memory: "{{ .Values.resources.memoryLimits }}"
               cpu: "{{ .Values.resources.cpuLimits }}"
           terminationMessagePath: /dev/termination-log
-         {{- if or .Values.volumeMounts }}
-         {{- with .Values.volumeMounts }}
+         {{- if or .Values.volumes }}
           volumeMounts:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
+            {{- range .Values.volumes }}
+            - name: {{ .name }}
+              mountPath:  {{ .mountPath }}
+              readOnly: {{ .readOnly }}
+            {{- end }}
           {{- end }}
       {{- if or .Values.volumes }}
-      {{- with .Values.volumes }}
       volumes:
-        {{- toYaml . | nindent 8 }}
+      {{- range .Values.volumes }}
+        - name: {{ .name }}
+          {{- if .configMap }}
+          configMap:
+            name: {{.configMap}}
+          {{- end }}
+          {{- if .secret }}
+          secret:
+            secretName: {{ .secret }}
+          {{- end }}
       {{- end }}
       {{- end }}

@@ -29,22 +29,16 @@ resources:
   cpuRequests: 300m
   cpuLimits: 1000m
 
-volumeMounts: [ ]
-#  - name: example-service-config-volume
-#    mountPath: /app/application-config
-#    readOnly: true
-#  - name: example-service-vault-config-volume
-#    mountPath: /app/application-secret
-#    readOnly: true
 
-volumes: [ ]
-#  - name: example-service-config-volume
-#    mountPath: /app/application-config
-#    configMap:
-#      name: example-service-config
-#  - name: example-service-vault-config-volume
-#    secret:
-#      secretName: example-service-vault-config
+volumes: []
+# - name: example-service-config-volume
+#   mountPath: /app/application-config
+#   configMap: example-service-config
+#   readOnly: true
+# - name: example-service-vault-config-volume
+#   mountPath: /app/application-secret
+#   secret: example-service-vault-config
+#   readOnly: true
 
 #environment:
 #  SPRING_CONFIG_IMPORT: "file:/app/application-secret/vault-config.yaml"
