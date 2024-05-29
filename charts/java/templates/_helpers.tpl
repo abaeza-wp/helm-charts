@@ -59,13 +59,13 @@ Selector labels
 {{- define "java.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "java.fullname" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/version: {{ .Chart.AppVersion }}
 {{- end }}
 
 {{/*
 Create unified labels
 */}}
 {{- define "java.metaLabels" -}}
-app.kubernetes.io/version: {{ .Chart.AppVersion }}
 helm.sh/chart: {{ include "java.chart" . }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
