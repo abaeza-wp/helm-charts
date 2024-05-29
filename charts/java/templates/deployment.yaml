@@ -72,24 +72,26 @@ spec:
             httpGet:
               path: {{ .Values.healthEndpoint }}
               port: {{ .Values.applicationPort }}
-            initialDelaySeconds: 30
-            successThreshold: 2
-            failureThreshold: 2
+            successThreshold: 1
+            failureThreshold: 3
             periodSeconds: 5
+            timeoutSeconds: 5
           readinessProbe:
             httpGet:
               path: {{ .Values.healthEndpoint }}
               port: {{ .Values.applicationPort }}
-            initialDelaySeconds: 10
+            successThreshold: 2
             failureThreshold: 2
             periodSeconds: 5
+            timeoutSeconds: 5
           startupProbe:
             httpGet:
               path: {{ .Values.healthEndpoint }}
               port: {{ .Values.applicationPort }}
-            initialDelaySeconds: 30
+            successThreshold: 1
             failureThreshold: 30
             periodSeconds: 5
+            timeoutSeconds: 5
           resources:
             requests:
               memory: "{{ .Values.resources.memoryRequests }}"
