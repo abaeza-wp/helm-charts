@@ -16,9 +16,7 @@ imageTag: "1236"
 
 applicationPort: 8080
 
-# a4e-example-service-live.apps.eu-west-1-7z55k.dev.msp.worldpay.io
-ingressHost: {{ .Values.tenant }}-{{ .Values.name }}-{{ .Values.global.functionalEnvironment }}.apps.{{ .Values.global.awsRegion }}-{{ .Values.global.clusterName }}.{{ .Values.global.environment }}.msp.worldpay.io
-
+ingressHost: ""
 healthEndpoint: /status
 
 serviceAccountName: ""

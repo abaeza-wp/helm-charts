@@ -9,7 +9,11 @@ metadata:
     haproxy.router.openshift.io/balance: roundrobin
     haproxy.router.openshift.io/disable_cookies: "true"
 spec:
+  {{ if .Values.ingressHost}}
   host: {{ tpl .Values.ingressHost . | lower}}
+  {{else}}
+  host: {{.Values.tenant}}-{{.Values.name}}-{{ .Values.global.functionalEnvironment }}.apps.{{ .Values.global.awsRegion }}-{{ .Values.global.clusterName }}.{{ .Values.global.environment }}.msp.worldpay.io | lower}}
+  {{end}}
   path: "/"
   tls:
     termination: edge
