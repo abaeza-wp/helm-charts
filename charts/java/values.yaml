@@ -54,7 +54,6 @@ environment:
 
 secrets:
 #  a4e-sessions-service:
-#    - MY_SECRET_ENV_VAR: my-kubernetes-secret-key
 #    - VAULT_ROLE_ID: vault-role-id
 #    - VAULT_SECRET_ID: vault-secret-id
 #    - VAULT_ROLE_NAME: vault-role-name
