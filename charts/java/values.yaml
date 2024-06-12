@@ -63,12 +63,12 @@ secrets:
 #Externalsecrets
 awsSecrets:
   refreshInterval: 10m
-#  serviceAccount: "aws-secret-manager-service-account"
-#  secrets:
-#    dev-aws-secret-manager-key:
-#      - awsSecretPropertyKey: my-aws-secret-key-property # will pull this from aws
-#        secretKey: keystore-password # will store as this in kubernetes secret
-#        decodingStrategy: None #Will try to decode using this strategy See: https://external-secrets.io/v0.5.9/guides-decoding-strategy/
-#      - awsSecretPropertyKey: 2my-aws-secret-key-property # will pull this from aws
-#        secretKey: 2keystore-password # will store as this in kubernetes secret
-#
+  serviceAccount: "aws-secret-manager-service-account"
+  secrets:
+    dev-aws-secret-manager-key:
+      - awsSecretPropertyKey: my-aws-secret-key-property # will pull this from aws
+        secretKey: keystore-password # will store as this in kubernetes secret
+        decodingStrategy: None #Will try to decode using this strategy See: https://external-secrets.io/v0.5.9/guides-decoding-strategy/
+      - awsSecretPropertyKey: 2my-aws-secret-key-property # will pull this from aws
+        secretKey: 2keystore-password # will store as this in kubernetes secret
+
