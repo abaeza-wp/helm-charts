@@ -62,7 +62,7 @@ secrets:
 
 #Externalsecrets
 awsSecrets:
-#  refreshInterval: 10m
+  refreshInterval: 10m
 #  serviceAccount: "aws-secret-manager-service-account"
 #  secrets:
 #    dev-aws-secret-manager-key:
