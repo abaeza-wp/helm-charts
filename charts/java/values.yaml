@@ -30,7 +30,7 @@ resources:
   cpuLimits: 1000m
 
 
-volumes: []
+volumes: [ ]
 # - name: example-service-config-volume
 #   mountPath: /app/application-config
 #   configMap: example-service-config
@@ -54,6 +54,7 @@ environment:
 
 secrets:
 #  a4e-sessions-service:
+#    - MY_SECRET_ENV_VAR: my-kubernetes-secret-key
 #    - VAULT_ROLE_ID: vault-role-id
 #    - VAULT_SECRET_ID: vault-secret-id
 #    - VAULT_ROLE_NAME: vault-role-name
@@ -61,8 +62,9 @@ secrets:
 #    - REDIS_PASSWORD: redis-password
 
 #Externalsecrets
-#awsSecrets:
-#  my-vault-name:
-#    secrets:
-#      - name: some-aws-secret-key
-#        alias: MY_ENV_VAR
+awsSecrets:
+#  refreshInterval: 10m
+#  serviceAccount: "aws-secret-manager-service-account"
+#  secrets:
+#    dev-aws-secret-manager-key:
+#      - MY_SECRET_KEY: my-aws-secret-key-property
