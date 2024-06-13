@@ -6,6 +6,16 @@ Expand the name of the chart.
 {{- end }}
 
 {{/*
+Create a default fully qualified app name with tenant
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+Optionally includes functional environment if one was defined using pattern <tenant>-<app-name>-<functional-environment>
+e.g a4e-example-service-live, e.g a4e-example-service-try
+*/}}
+{{- define "java.fullnameWithTenant" -}}
+{{- printf "%s-%s" .Values.tenant (include "java.fullname" .) | trunc 63 | trimSuffix "-" | lower}}
+{{- end }}
+
+{{/*
 Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 Optionally includes functional environment if one was defined using pattern -<app-name>-<functional-environment>
