@@ -3,7 +3,8 @@ kind: PodDisruptionBudget
 metadata:
   name: {{ include "java.fullname" . }}
   annotations:
-    helm.sh/hook: "post-install,post-upgrade"  #Currently there's a race condition between in helm 3 which cause pdb to fail since it cannot find the pods
+    helm.sh/hook: "post-install,post-upgrade,post-delete"  #Currently there's a race condition between in helm 3 which cause pdb to fail since it cannot find the pods
+    helm.sh/hook-delete-policy: before-hook-creation
   labels:
     {{- include "java.labels" . | nindent 4 }}
 
