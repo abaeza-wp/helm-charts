@@ -22,8 +22,8 @@ Optionally includes functional environment if one was defined using pattern -<ap
 e.g example-service-live, e.g example-service-try
 */}}
 {{- define "java.fullname" -}}
-{{- if .Values.fullnameOverride }}
-{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" | lower}}
+{{- if .Values.global.fullnameOverride }}
+{{- .Values.global.fullnameOverride | trunc 63 | trimSuffix "-" | lower}}
 {{- else }}
 {{- $name := default .Values.name }}
 {{- if .Values.global.functionalEnvironment }}

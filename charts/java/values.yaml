@@ -4,15 +4,13 @@ global:
   environment: ""
   clusterName: ""
   functionalEnvironment: ""
-
-# Allows Overriding the name of resources
-fullnameOverride: ""
+  # Allows Overriding the name of resources
+  fullnameOverride: ""
+  imageTag: "1236"
 
 # These values will be customized by consumers
 tenant: "a4e"
 name: "example-service"
-
-imageTag: "1236"
 
 applicationPort: 8080
 
