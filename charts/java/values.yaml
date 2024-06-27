@@ -6,6 +6,7 @@ global:
   functionalEnvironment: ""
   # Allows Overriding the name of resources
   fullnameOverride: ""
+  namespaceOverride: ""
   imageTag: "1236"
 
 # These values will be customized by consumers

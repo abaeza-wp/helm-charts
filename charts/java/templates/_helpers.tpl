@@ -40,10 +40,14 @@ optionally includes functional environment if one was defined using pattern <ten
 e.g a4e-example-service-live, e.g a4e-example-service-try
 */}}
 {{- define "java.namespace" -}}
+{{- if .Values.global.namespaceOverride }}
+{{- .Values.global.namespaceOverride | trunc 63 | trimSuffix "-" | lower}}
+{{- else }}
 {{- if .Values.global.functionalEnvironment }}
 {{- printf "%s-%s-%s" .Values.tenant .Values.name .Values.global.functionalEnvironment | trunc 63 | trimSuffix "-" }}
 {{- else }}
 {{- printf "%s-%s" .Values.tenant .Values.name | trunc 63 | trimSuffix "-" }}
+{{- end }}
 {{- end }}
 {{- end }}
 
