@@ -12,11 +12,7 @@ spec:
 {{ if .Values.ingressHost}}
   host: {{ tpl .Values.ingressHost . | lower}}
 {{else}}
-  {{ if .Values.global.functionalEnvironment}}
-  host: {{ tpl "{{.Values.tenant}}-{{.Values.name}}-{{ .Values.global.functionalEnvironment }}.apps.{{ .Values.global.awsRegion }}-{{ .Values.global.clusterName }}.{{ .Values.global.environment }}.msp.worldpay.io" . | lower}}
-  {{else}}
-  host: {{ tpl "{{.Values.tenant}}-{{.Values.name}}.apps.{{ .Values.global.awsRegion }}-{{ .Values.global.clusterName }}.{{ .Values.global.environment }}.msp.worldpay.io" . | lower}}
-  {{end}}
+  host: {{ include "java.fullname" . }}.apps.{{ .Values.global.awsRegion }}-{{ .Values.global.clusterName }}.{{ .Values.global.environment }}.msp.worldpay.io" . | lower
 {{end}}
   path: "/"
   tls:
