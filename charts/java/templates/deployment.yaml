@@ -15,7 +15,7 @@ spec:
       name: {{ include "java.fullname" . }}
       labels:
         {{- include "java.labels" . | nindent 8 }}
-        format.logging.fis.dev/main: json
+        format.logging.fis.dev/main: keyvalue3
     spec:
       {{- if or .Values.serviceAccountName }}
       serviceAccountName: {{ .Values.serviceAccountName}}
