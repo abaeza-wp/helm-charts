@@ -53,7 +53,7 @@ spec:
             - name: {{ $envKey }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ $secretName }}
+                  name: {{ tpl $secretName $ | quote }}
                   key: {{ $val | quote }}
           {{- end }}
           {{- end }}
@@ -120,7 +120,7 @@ spec:
           {{- end }}
           {{- if .secret }}
           secret:
-            secretName: {{ .secret }}
+            secretName: {{ tpl .secret $ | quote }}
             {{- if .items }}
             items:
             {{- with .items }}

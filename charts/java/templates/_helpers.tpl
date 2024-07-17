@@ -26,11 +26,7 @@ e.g example-service-live, e.g example-service-try
 {{- .Values.global.fullnameOverride | trunc 63 | trimSuffix "-" | lower}}
 {{- else }}
 {{- $name := default .Values.name }}
-{{- if .Values.global.functionalEnvironment }}
-{{- printf "%s-%s" $name .Values.global.functionalEnvironment | trunc 63 | trimSuffix "-" | lower}}
-{{- else }}
 {{- printf "%s" $name | trunc 63 | trimSuffix "-" | lower }}
-{{- end }}
 {{- end }}
 {{- end }}
 
