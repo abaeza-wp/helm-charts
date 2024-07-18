@@ -12,7 +12,7 @@ spec:
 {{ if .Values.ingressHost}}
   host: {{ tpl .Values.ingressHost . | lower}}
 {{else}}
-  host: "{{ include "java.fullname" . }}.{{ include "java.namespace" . }}.apps.{{ .Values.global.awsRegion }}-{{ .Values.global.clusterName }}.{{ .Values.global.environment }}.msp.worldpay.io"
+  host: "{{ include "java.fullname" . }}-{{ include "java.namespace" . }}.apps.{{ .Values.global.awsRegion }}-{{ .Values.global.clusterName }}.{{ .Values.global.environment }}.msp.worldpay.io"
 {{end}}
   path: "/"
   tls:
